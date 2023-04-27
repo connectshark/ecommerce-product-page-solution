@@ -7,16 +7,16 @@
     <router-link to="/">
       <img src="../assets/logo.svg" alt="logo">
     </router-link>
-      <nav class="menu" :class="{ 'active': isModal }">
-        <button type="button" class="btn close-btn" @click.stop="isModal = !isModal">
-          <i class='bx bx-x bx-sm'></i>
-        </button>
-        <ul class="nav-list">
-          <li class="nav-item" v-for="nav in navs">
-            <a href="javascript:;">{{ nav.name }}</a>
-          </li>
-        </ul>
-      </nav>
+    <nav class="menu" :class="{ 'active': isModal }">
+      <button type="button" class="btn close-btn" @click.stop="isModal = !isModal">
+        <i class='bx bx-x bx-sm'></i>
+      </button>
+      <ul class="nav-list">
+        <li class="nav-item" v-for="nav in navs">
+          <a href="javascript:;">{{ nav.name }}</a>
+        </li>
+      </ul>
+    </nav>
     <button type="button" class=" cart-btn btn">
       <i class='bx bx-cart-alt bx-sm'></i>
     </button>
@@ -62,16 +62,20 @@ img {
 }
 header{
   .container {
-    padding: 2rem 1rem;
+    padding: 0 1rem;
     max-width: 1080px;
     margin: auto;
     display: flex;
     align-items: center;
     gap: 1rem;
+    border-bottom: 2px solid var(--neutral-light-grayish-blue);
   }
 }
 .menu-btn {
   display: none;
+}
+.menu {
+  margin-left: 2rem;
 }
 .cart-btn {
   margin-left: auto;
@@ -81,8 +85,16 @@ header{
   align-items: center;
   gap: 2rem;
 }
-.nav-item a {
-  color: var(--neutral-dark-grayish-blue);
+.nav-item {
+  a {
+    display: block;
+    line-height: 6rem;
+    color: var(--neutral-dark-grayish-blue);
+    border-bottom: 2px solid transparent;
+    &:hover {
+      border-bottom: 2px solid var(--primary-orange);
+    }
+  }
 }
 .close-btn{
   display: none;
@@ -91,6 +103,9 @@ header{
   width: 3rem;
 }
 @media screen and (max-width: 768px) {
+  header .container {
+    padding: 1rem;
+  }
   .avatar-btn {
     width: 1.5rem;
   }
@@ -105,6 +120,7 @@ header{
     backdrop-filter: blur(10px);
     background-color: #000000aa;
     display: none;
+    margin-left: 0;
   }
   .active {
     display: block;

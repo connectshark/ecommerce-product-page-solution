@@ -8,12 +8,12 @@
             mode="out-in"
             name="fade"
           >
-            <img :key="nowItem.name" :src="nowItem.cover" alt="product">
+            <img @click="modal = true" :key="nowItem.name" :src="nowItem.cover" alt="product">
           </Transition>
-          <button type="button" class="gallery-btn" @click="goNext">
+          <button type="button" class="gallery-btn" @click.stop="goNext">
             <i class='bx bx-chevron-right bx-md'></i>
           </button>
-          <button type="button" class="gallery-btn" @click="goPrev">
+          <button type="button" class="gallery-btn" @click.stop="goPrev">
             <i class='bx bx-chevron-right bx-rotate-180 bx-md' ></i>
           </button>
         </figure>
@@ -62,7 +62,7 @@
     @click="modal = false"
     :productList="productList"
   >
-    <button @click="modal = false">
+    <button class="modal-btn" @click="modal = false">
       <i class='bx bx-x bx-md'></i>
     </button>
   </Modal>
@@ -198,6 +198,9 @@ const {
     width: 3rem;
     height: 3rem;
     color: var(--primary-orange);
+    &:hover {
+      opacity: .8;
+    }
     i {
       vertical-align: middle;
     }
@@ -210,6 +213,9 @@ const {
     width: 100%;
     border-radius: .5rem;
     font-weight: var(--font-bold);
+    &:hover {
+      opacity: .8;
+    }
     i {
       vertical-align: middle;
     }
@@ -246,11 +252,17 @@ const {
   }
   .product {
     width: 40%;
+    h2 {
+      line-height: 4;
+    }
   }
   .figure {
     border-radius: 1rem;
     overflow: hidden;
     margin-bottom: 2rem;
+    img {
+      cursor: pointer;
+    }
     .gallery-btn {
       display: none;
     }
@@ -265,6 +277,9 @@ const {
       overflow: hidden;
       width: 20%;
       border: 2px solid transparent;
+      &:hover {
+        opacity: .8;
+      }
     }
     button.active {
       border: 2px solid var(--primary-orange);
@@ -288,7 +303,10 @@ const {
   }
 }
 
-button {
+button.modal-btn {
   color: white;
+  &:hover {
+    color: var(--primary-orange);
+  }
 }
 </style>
