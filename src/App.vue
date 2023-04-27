@@ -5,7 +5,8 @@
 
 <style lang="scss">
 #app {
-  font-family: 'Poppins', 'Noto Sans TC', sans-serif;
-  text-align: center;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--neutral-black);
 }
 </style>

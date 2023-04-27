@@ -9,7 +9,7 @@
   "homepage": "https://github.com/connectshark/vite-template",
   "repository": {
     "type": "git",
-    "url": "https://github.com/connectshark/vite-template"
+    "url": "ecommerce-product-page-solution"
   },
   "scripts": {
     "dev": "vite",
