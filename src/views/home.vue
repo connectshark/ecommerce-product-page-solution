@@ -4,12 +4,7 @@
     <div class="container">
       <div class="gallery">
         <figure class="figure">
-          <Transition
-            mode="out-in"
-            name="fade"
-          >
-            <img @click="modal = true" :key="nowItem.name" :src="nowItem.cover" alt="product">
-          </Transition>
+          <img @click="modal = true" :key="nowItem.name" :src="nowItem.cover" alt="product">
           <button type="button" class="gallery-btn" @click.stop="goNext">
             <i class='bx bx-chevron-right bx-md'></i>
           </button>
@@ -29,7 +24,7 @@
         <h2>Sneaker Company</h2>
         <h1>Fall Limited Edition Sneakers</h1>
         <p>These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
-        <form @submit.prevent="submitHandler" class="price-form">
+        <div class="price-form">
           <div class="info-bar">
             <p class="price">$125.00</p>
             <p class="percent">50%</p>
@@ -40,19 +35,19 @@
               <button type="button" @click="minusPrice">
                 <i class='bx bx-minus'></i>
               </button>
-              <span>{{ price }}</span>
-              <button type="button" @click="price++">
+              <span>{{ amount }}</span>
+              <button type="button" @click="amount++">
                 <i class='bx bx-plus'></i>
               </button>
             </div>
             <div class="submit-bar">
-              <button type="submit">
+              <button type="submit" @click="submitHandler">
                 <i class='bx bx-cart-alt bx-sm'></i>
                 <span>Add to cart</span>
               </button>
             </div>
           </div>
-        </form>
+        </div>
       </section>
     </div>
   </main>
@@ -77,15 +72,24 @@ import { useCartStore } from '../store/cart'
 import useGallery from '../composables/useGallery'
 import Modal from '../components/modal.vue'
 const store = useCartStore()
-const price = ref(0)
-const modal = ref(true)
+const amount = ref(0)
+const modal = ref(false)
 
 const minusPrice = () => {
-  if (price.value <= 0) return
-  price.value--
+  if (amount.value <= 0) return
+  amount.value--
 }
 
-const submitHandler = async () => {}
+const submitHandler = async () => {
+  if (amount.value > 0) {
+    store.addCard({
+      name: 'Fall Limited Edition Sneakers',
+      icon: 'product/image-product-1-thumbnail.jpg',
+      price: 125,
+      amount: amount.value,
+    })
+  }
+}
 const productList = [
   {
     name: 'image-product-1',
@@ -213,6 +217,7 @@ const {
     width: 100%;
     border-radius: .5rem;
     font-weight: var(--font-bold);
+    box-shadow: 0 25px 50px -12px var(--primary-orange);
     &:hover {
       opacity: .8;
     }
@@ -225,17 +230,6 @@ const {
     }
   }
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .1s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 
 @media screen and (min-width: 768px) {
   .container {
